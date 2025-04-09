@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeatherNow | Mapa Meteorológico</title>
+    <link rel="icon" type="image/x-icon" href="./iconos/cloud.ico">
+
+    <link rel="stylesheet" href="./estilos/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="./estilos/weathernow.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <script src="./codigo/mapa.js" defer></script>
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="logo">Weather<span>Now</span></h1>
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="mapa.html" class="active">Mapa</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="container main-content">
+        <div class="row">
+            <div class="col-12">
+                <section class="panel map-panel">
+                    <div class="panel-header">
+                        <h2>Mapa meteorológico en tiempo real</h2>
+                    </div>
+                    <div class="panel-body">
+                        <div class="map-container">
+                            <div id="weatherMap" class="weather-map"></div>
+                        </div>
+
+                        <div class="map-controls mt-4">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="mapType" class="form-label">Tipo de mapa</label>
+                                        <select class="form-select" id="mapType" onchange="changeMapType()">
+                                            <option value="temperature">Temperatura</option>
+                                            <option value="precipitation">Precipitaciones</option>
+                                            <option value="wind">Viento</option>
+                                            <option value="clouds">Nubosidad</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="zoomLevel" class="form-label">Nivel de zoom</label>
+                                        <input type="range" class="form-range" min="1" max="10" value="5" id="zoomLevel"
+                                            onchange="changeZoom()">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="regionSelect" class="form-label">Región</label>
+                                        <select class="form-select" id="regionSelect" onchange="changeRegion()">
+                                            <option value="ar">Argentina</option>
+                                            <option value="sa">Sudamérica</option>
+                                            <option value="na">Norteamérica</option>
+                                            <option value="eu">Europa</option>
+                                            <option value="as">Asia</option>
+                                            <option value="global">Global</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="map-legend mt-4">
+                            <h4>Leyenda</h4>
+                            <div class="legend-items">
+                                <div class="legend-item">
+                                    <div class="legend-color" style="background-color: #0000FF;"></div>
+                                    <span>-10°C a 0°C</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-color" style="background-color: #00FFFF;"></div>
+                                    <span>0°C a 10°C</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-color" style="background-color: #00FF00;"></div>
+                                    <span>10°C a 20°C</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-color" style="background-color: #FFFF00;"></div>
+                                    <span>20°C a 30°C</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-color" style="background-color: #FF0000;"></div>
+                                    <span>30°C a 40°C</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="panel info-panel mt-4">
+                    <div class="panel-header">
+                        <h2>Información del mapa</h2>
+                    </div>
+                    <div class="panel-body">
+                        <p class="mb-3">Este mapa meteorológico te permite visualizar diferentes condiciones climáticas
+                            en tiempo real:</p>
+                        <ul class="feature-list">
+                            <li><strong>Temperatura:</strong> Visualiza las temperaturas actuales con un código de
+                                colores.</li>
+                            <li><strong>Precipitaciones:</strong> Observa las áreas con lluvia o nieve y su intensidad.
+                            </li>
+                            <li><strong>Viento:</strong> Analiza la dirección y velocidad del viento con vectores
+                                dinámicos.</li>
+                            <li><strong>Nubosidad:</strong> Comprueba la cobertura de nubes en diferentes regiones.</li>
+                        </ul>
+                        <p class="mt-3">Puedes hacer zoom, cambiar de región o seleccionar diferentes capas para
+                            personalizar tu visualización.</p>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <p>WeatherNow &copy; 2025 | Powered by Weather API</p>
+        </div>
+    </footer>
+
+    <script src="./estilos/bootstrap.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WeatherNow | Pronóstico Meteorológico</title>
+  <link rel="icon" type="image/x-icon" href="./iconos/cloud.ico">
+
+  <link rel="stylesheet" href="./estilos/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="./estilos/weathernow.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <script src="./codigo/locations.js" defer></script>
+  <script src="./codigo/script.js" defer></script>
+</head>
+
+<body>
+  <header class="main-header">
+    <div class="container">
+      <div class="header-content">
+        <h1 class="logo">Weather<span>Now</span></h1>
+        <nav class="main-nav">
+          <ul>
+            <li><a href="index.html" class="active">Pronostico del tiempo</a></li>
+            <li><a href="mapa.html">Mapa</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="container main-content">
+    <div class="row g-4">
+      <div class="col-lg-5 col-md-12">
+        <section class="panel search-panel">
+          <div class="panel-header">
+            <h2>Buscar ubicación</h2>
+          </div>
+          <div class="panel-body">
+            <div class="form-group">
+              <label for="locationSelect" class="form-label">Selecciona una ciudad</label>
+              <select class="form-select" id="locationSelect">
+                <!-- Opciones serán cargadas por JS -->
+              </select>
+            </div>
+            <button type="button" class="btn btn-primary search-btn" onclick="getWeatherData()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
+                viewBox="0 0 16 16">
+                <path
+                  d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+              </svg>
+              Obtener pronóstico
+            </button>
+            <div id="errorAlert" class="alert alert-danger mt-3" role="alert">
+              Por favor selecciona una ciudad antes de buscar
+            </div>
+          </div>
+        </section>
+
+        <div id="weatherSummary"></div>
+
+        <section class="panel theme-panel">
+          <div class="panel-header">
+            <h2>Paleta de colores</h2>
+          </div>
+          <div class="panel-body">
+            <div class="color-palette">
+              <div class="color-swatch swatch1"></div>
+              <div class="color-swatch swatch2"></div>
+              <div class="color-swatch swatch3"></div>
+              <div class="color-swatch swatch4"></div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="col-lg-7 col-md-12">
+        <section class="panel weather-panel">
+          <div class="panel-header">
+            <h2 id="weatherLocation" class="location-heading">Pronóstico del tiempo</h2>
+          </div>
+          <div class="panel-body weather-details">
+            <div class="row">
+              <div class="col-md-6 temperature-container">
+                <div id="loadingSpinner" class="spinner">
+                  <div class="double-bounce1"></div>
+                  <div class="double-bounce2"></div>
+                </div>
+                <div id="temperatureDisplay" class="temperature-display">-</div>
+              </div>
+              <div class="col-md-6 weather-icon-container">
+                <img id="weatherIcon" class="weather-icon" src="./img_apiclima/imagenpordefecto.png"
+                  alt="Condición climática" />
+              </div>
+            </div>
+
+            <h3 id="weatherDescription" class="weather-description">
+              Selecciona una ubicación para ver el pronóstico
+            </h3>
+
+            <div class="weather-details-grid">
+              <div class="detail-group">
+                <h4>Sensación térmica</h4>
+                <div class="detail-value">
+                  <input type="text" class="form-control detail-input" id="feelsLike" value="-" readonly />
+                </div>
+              </div>
+
+              <div class="detail-group">
+                <h4>Humedad</h4>
+                <div class="detail-value">
+                  <input type="text" class="form-control detail-input" id="humidity" value="-" readonly />
+                </div>
+              </div>
+
+              <div class="detail-group">
+                <h4>Latitud</h4>
+                <div class="detail-value">
+                  <input type="text" class="form-control detail-input" id="latitude" value="-" readonly />
+                </div>
+              </div>
+
+              <div class="detail-group">
+                <h4>Longitud</h4>
+                <div class="detail-value">
+                  <input type="text" class="form-control detail-input" id="longitude" value="-" readonly />
+                </div>
+              </div>
+
+              <div class="detail-group">
+                <h4>Velocidad del viento</h4>
+                <div class="detail-value">
+                  <input type="text" class="form-control detail-input" id="windSpeed" value="-" readonly />
+                </div>
+              </div>
+
+              <div class="detail-group">
+                <h4>Dirección</h4>
+                <div class="detail-value">
+                  <input type="text" class="form-control detail-input" id="windDirection" value="-" readonly />
+                </div>
+              </div>
+
+              <div class="detail-group full-width">
+                <h4>Descripción del viento</h4>
+                <div class="detail-value">
+                  <input type="text" class="form-control detail-input" id="windDesc" value="-" readonly />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="main-footer">
+    <div class="container">
+      <p>WeatherNow &copy; 2025 | Powered by Weather API</p>
+    </div>
+  </footer>
+
+  <script src="./estilos/bootstrap.min.js"></script>
+</body>
+
+</html>
