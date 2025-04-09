@@ -103,7 +103,7 @@ function updateWeatherUI(data) {
 
   // Actualizar icono del clima usando la función de mapeo
   const mappedIconCode = mapIconCode(data.wx_icon);
-  weatherIcon.src = `../img_apiclima/${mappedIconCode}.png`;
+  weatherIcon.src = `./img_apiclima/${mappedIconCode}.png`;
   weatherIcon.alt = description;
 
   // Actualizar detalles adicionales
@@ -144,7 +144,7 @@ function createWeatherSummary(temp, openWeatherIcon, description) {
   weatherSummary.innerHTML = `
     <div class="weather-summary-card">
       <div class="summary-temp">${temp}°</div>
-      <img class="summary-icon" src="../img_apiclima/${mappedIconCode}.png" alt="${description}" />
+      <img class="summary-icon" src="./img_apiclima/${mappedIconCode}.png" alt="${description}" />
     </div>
   `;
 }
